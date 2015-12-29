@@ -10,6 +10,22 @@ set fileencodings=utf-8,iso-2022-jp-3,euc-jisx0213,cp932,euc-jp,sjis,jis,latin,i
 
 call neobundle#begin(expand('~/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'geoffharcourt/one-dark.vim'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'vim-scripts/twilight'
+NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'vim-scripts/Wombat'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'vim-scripts/rdark'
+NeoBundle 'Flake8-vim'
+NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'hynek/vim-python-pep8-indent'
+NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'scrooloose/nerdtree'
@@ -22,16 +38,23 @@ NeoBundle 'alpaca-tc/alpaca_powertabline'
 NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'haya14busa/incsearch.vim'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'tpope/vim-fugitive'
 call neobundle#end()
+
+colorscheme hybrid
 
 NeoBundleCheck
 map <C-t> :NERDTree <enter>
+
+autocmd QuickFixCmdPost *grep* cwindow
+set statusline+=%{fugitive#statusline()}
 
 set autoindent
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set wrapscan
 set laststatus=2
 set t_Co=256
 
@@ -41,6 +64,7 @@ map <C-k> :Gtags -g
 map <C-i> :GtagsCursor<CR>
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
+
 map <C-t> :NERDTree <enter>
 
 let g:lightline = {
@@ -53,7 +77,7 @@ let g:lightline = {
     \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
     \ }
 
-silent! set title titlelen=100 titleold= titlestring=%f noicon iconstring=%t norightleft showtabline=1
+"silent! set title titlelen=100 titleold= titlestring=%f noicon iconstring=%t norightleft showtabline=1
 silent! set number background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key
 
 silent! syntax enable
@@ -68,8 +92,38 @@ let g:vimshell_user_prompt = 'getcwd()'
 set shellpipe=2>\&1\|/tex/bin/nkf\ -w>%s
 set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 
-" Always show statusline
-set laststatus=2
+set path+=/usr/include/boost
+set path+=/usr/include/eigen3
+set path+=/usr/include/c++/4.8.4
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_underbar_completion = 1
 
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
+" 入力モードで開始する
+let g:unite_enable_start_insert=1
+" バッファ一覧
+noremap <C-P> :Unite buffer<CR>
+" ファイル一覧
+noremap <C-N> :Unite -buffer-name=file file<CR>
+" 最近使ったファイルの一覧
+noremap <C-Z> :Unite file_mru<CR>
+" sourcesを「今開いているファイルのディレクトリ」とする
+noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+
+function! RosCatkinMake()
+	echo "RosCatkinMake"
+	! cd ~/catkin_ws/;catkin_make
+endfunction
+command! RosCatkinMake :call RosCatkinMake()
+
+function! RosTopicList()
+	vnew +enew
+	r! rostopic list
+endfunction
+command! RosTopicList :call RosTopicList()
+
+"python setting
+let g:PyFlakeOnWrite = 1
+let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes'
+let g:PyFlakeDefaultComplexity=10
+
+let g:syntastic_python_checkers = ['pyflakes', 'pep8']
