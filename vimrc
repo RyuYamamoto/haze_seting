@@ -51,12 +51,14 @@ map <C-t> :NERDTree <enter>
 autocmd QuickFixCmdPost *grep* cwindow
 set statusline+=%{fugitive#statusline()}
 
-set autoindent
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set mouse=a
+set smartindent
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set laststatus=2
 set t_Co=256
+set noexpandtab
 
 map <C-g> :Gtags
 map <C-f> :Gtags -f
