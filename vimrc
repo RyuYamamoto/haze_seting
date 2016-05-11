@@ -43,23 +43,26 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'tpope/vim-fugitive'
 call neobundle#end()
 
-colorscheme hybrid
+colorscheme molokai
+syntax on
 
 NeoBundleCheck
 map <C-t> :NERDTree <enter>
 
 autocmd QuickFixCmdPost *grep* cwindow
-set statusline+=%{fugitive#statusline()}
+"set statusline+=%{fugitive#statusline()}
+
+nnoremap <C-e> :!python %<CR>
 
 set mouse=a
 set smartindent
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set laststatus=2
+set tabstop=4
+set shiftwidth=4
+set showtabline=4
+set softtabstop=4
+set laststatus=4
 set t_Co=256
 set noexpandtab
-
 map <C-g> :Gtags
 map <C-f> :Gtags -f
 map <C-k> :Gtags -g
