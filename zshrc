@@ -1,7 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="agnoster"
+source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+ZSH_THEME="origin"
 
 plugins=(git)
 
@@ -13,8 +15,8 @@ source $ZSH/oh-my-zsh.sh
 
 alias branch="git branch -r"
 alias master="git checkout master"
-alias roscd="roscd && cd ../src"
-alias catkin_make="roscd && cd ../ && catkin_make"
+#alias roscd="roscd && cd ../src"
+#alias catkin_make="roscd && cd ../ && catkin_make"
 alias log_graph="git log --graph --pretty='format:%C(yellow)%h%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset'"
 
 function rosn() {
@@ -55,3 +57,4 @@ export TERM="screen-256color"
 
 source /opt/ros/indigo/setup.zsh
 source ~/catkin_ws/devel/setup.zsh
+#source ~/test_catkin_ws/devel/setup.zsh
