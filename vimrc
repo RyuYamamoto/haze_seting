@@ -10,6 +10,7 @@ set fileencodings=utf-8,iso-2022-jp-3,euc-jisx0213,cp932,euc-jp,sjis,jis,latin,i
 
 call neobundle#begin(expand('~/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'geoffharcourt/one-dark.vim'
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'w0ng/vim-hybrid'
@@ -20,7 +21,7 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'vim-scripts/rdark'
-NeoBundle 'Flake8-vim'
+"NeoBundle 'Flake8-vim'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'hynek/vim-python-pep8-indent'
 NeoBundle 'Townk/vim-autoclose'
@@ -41,10 +42,14 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'open-browser.vim'
 call neobundle#end()
 
+"colorscheme newspaper
+"colorscheme louver
 colorscheme molokai
 syntax on
+set background=dark
 
 NeoBundleCheck
 map <C-t> :NERDTree <enter>
@@ -52,7 +57,7 @@ map <C-t> :NERDTree <enter>
 autocmd QuickFixCmdPost *grep* cwindow
 "set statusline+=%{fugitive#statusline()}
 
-nnoremap <C-e> :!python %<CR>
+"nnoremap <C-e> :!python %<CR>
 
 set mouse=a
 set smartindent
@@ -60,7 +65,7 @@ set tabstop=4
 set shiftwidth=4
 set showtabline=4
 set softtabstop=4
-set laststatus=4
+set laststatus=2
 set t_Co=256
 set noexpandtab
 map <C-g> :Gtags
@@ -82,7 +87,7 @@ let g:lightline = {
     \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
     \ }
 
-"silent! set title titlelen=100 titleold= titlestring=%f noicon iconstring=%t norightleft showtabline=1
+silent! set title titlelen=100 titleold= titlestring=%f noicon iconstring=%t norightleft showtabline=1
 silent! set number background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key
 
 silent! syntax enable
@@ -100,6 +105,8 @@ set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 set path+=/usr/include/boost
 set path+=/usr/include/eigen3
 set path+=/usr/include/c++/4.8.4
+set path+=/usr/include/qt4
+
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_underbar_completion = 1
 
@@ -127,8 +134,22 @@ endfunction
 command! RosTopicList :call RosTopicList()
 
 "python setting
-let g:PyFlakeOnWrite = 1
-let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes'
-let g:PyFlakeDefaultComplexity=10
+"let g:PyFlakeOnWrite = 1
+"let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes'
+"let g:PyFlakeDefaultComplexity=10
 
-let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+"let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+
+"open-browser.vim
+let g:netrw_nogx = 1
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+
+"vim上からpythonスクリプト実行
+autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %<CR>
+
+" Shift + 矢印でウィンドウサイズを変更
+nnoremap <S-Left>  <C-w><<CR>
+nnoremap <S-Right> <C-w>><CR>
+nnoremap <S-Up>    <C-w>-<CR>
+nnoremap <S-Down>  <C-w>+<CR>
