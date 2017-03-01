@@ -8,6 +8,8 @@ set encoding=utf-8
 set fileformats=unix,mac,dos
 set fileencodings=utf-8,iso-2022-jp-3,euc-jisx0213,cp932,euc-jp,sjis,jis,latin,iso-2022-jp
 
+set guifont=Ricty\ 11
+
 call neobundle#begin(expand('~/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Yggdroot/indentLine'
@@ -21,7 +23,6 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'vim-scripts/rdark'
-"NeoBundle 'Flake8-vim'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'hynek/vim-python-pep8-indent'
 NeoBundle 'Townk/vim-autoclose'
@@ -43,28 +44,28 @@ NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'open-browser.vim'
+NeoBundle 'miyakogi/seiya.vim'
 call neobundle#end()
 
-"colorscheme newspaper
-"colorscheme louver
 colorscheme molokai
-syntax on
+syntax off
 set background=dark
 
+let g:seiya_auto_enable=1
+
 NeoBundleCheck
-map <C-t> :NERDTree <enter>
 
 autocmd QuickFixCmdPost *grep* cwindow
-"set statusline+=%{fugitive#statusline()}
 
+"set statusline+=%{fugitive#statusline()}
 "nnoremap <C-e> :!python %<CR>
 
 set mouse=a
 set smartindent
-set tabstop=4
-set shiftwidth=4
-set showtabline=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set showtabline=2
+set softtabstop=2
 set laststatus=2
 set t_Co=256
 set noexpandtab
@@ -75,7 +76,7 @@ map <C-i> :GtagsCursor<CR>
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
 
-map <C-t> :NERDTree <enter>
+map <C-w> :NERDTree <enter>
 
 let g:lightline = {
     \ 'colorscheme' : 'solarized' ,
@@ -107,8 +108,8 @@ set path+=/usr/include/eigen3
 set path+=/usr/include/c++/4.8.4
 set path+=/usr/include/qt4
 
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_underbar_completion = 1
 
 " 入力モードで開始する
 let g:unite_enable_start_insert=1
@@ -153,3 +154,4 @@ nnoremap <S-Left>  <C-w><<CR>
 nnoremap <S-Right> <C-w>><CR>
 nnoremap <S-Up>    <C-w>-<CR>
 nnoremap <S-Down>  <C-w>+<CR>
+
