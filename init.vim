@@ -8,6 +8,8 @@ if dein#load_state('~/.deinvim/dein')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-clang')
   call dein#add('thinca/vim-quickrun')
+  call dein#add('vim-syntastic/syntastic')
+  call dein#add('itchyny/lightline.vim')
   call dein#end()
   call dein#save_state()
 endif
@@ -21,6 +23,17 @@ let g:deoplete#enable_at_startup = 1
 
 autocmd ColorScheme * highlight Normal ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none
+
+" lightline設定
+let g:lightline = {
+    \ 'colorscheme' : 'solarized' ,
+    \ 'component': {
+	\ 'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+    \ 'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+    \ },
+    \ 'separator': { 'left': '⮀', 'right': '⮂' },
+    \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+    \ }
 
 " vim設定
 syntax on
