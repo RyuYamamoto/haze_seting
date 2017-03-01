@@ -21,9 +21,6 @@ endif
 " deoplete設定
 let g:deoplete#enable_at_startup = 1
 
-autocmd ColorScheme * highlight Normal ctermbg=none
-autocmd ColorScheme * highlight LineNr ctermbg=none
-
 " lightline設定
 let g:lightline = {
     \ 'colorscheme' : 'solarized' ,
@@ -34,6 +31,16 @@ let g:lightline = {
     \ 'separator': { 'left': '⮀', 'right': '⮂' },
     \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
     \ }
+
+" syntastic設定
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " vim設定
 syntax on
