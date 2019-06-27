@@ -13,21 +13,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-
-# 履歴ファイルの保存先
-export HISTFILE=${HOME}/.zsh_history
-
-# メモリに保存される履歴の件数
-export HISTSIZE=1000
-
-# 履歴ファイルに保存される履歴の件数
-export SAVEHIST=100000
-
-# 重複を記録しない
-setopt hist_ignore_dups
-
-# 開始と終了を記録
-setopt EXTENDED_HISTORY
+source /opt/ros/kinetic/setup.zsh
+source ~/catkin_ws/devel/setup.zsh
 
 alias vi='nvim'
 export PYTHONPATH=${PYTHONPATH}:~/Downloads/pynaoqi-python2.7-2.5.5.5-linux64/lib/python2.7/site-packages
@@ -67,33 +54,6 @@ function percol_select_history() {
 }
 zle -N percol_select_history
 bindkey '^R' percol_select_history
-
-# ROS
-source /opt/ros/kinetic/setup.zsh
-source ~/catkin_ws/devel/setup.zsh
-
-function rosn() {
-	if [ "$1" = "" ]; then
-		topic=$(rosnode list | percol | xargs -n 1 rosnode info | percol | sed -e 's%.* \* \(/[/a-zA-Z0-9_]*\) .*%\1%')
-	else
-		topic=$(rosnode info $1 | percol | sed -e 's%.* \* \(/[/a-zA-Z0-9_]*\) .*%\1%')
-	fi
-	if [ "$topic" != "" ] ; then
-		rost $topic
-	fi
-}
-function rost() {
-	if [ "$1" = "" ]; then
-		node=$(rostopic list | percol | xargs -n 1 rostopic info | percol | sed -e 's%.* \* \(/[/a-zA-Z0-9_]*\) .*%\1%')
-	else
-		node=$(rostopic info $1 | percol | sed -e 's%.* \* \(/[/a-zA-Z0-9_]*\) .*%\1%')
-	fi
-	if [ "$node" != "" ] ; then
-		rosn $node
-	fi
-}
-
-alias roste="rostopic list | percol | xargs rostopic echo"
 
 # zplug
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
