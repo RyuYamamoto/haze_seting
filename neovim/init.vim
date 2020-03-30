@@ -81,3 +81,4 @@ if dein#check_install()
 endif
 " }}}
 
+nnoremap <silent><C-t> :NERDTreeToggle<CR>
