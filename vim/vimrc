@@ -10,50 +10,53 @@ set fileencodings=utf-8,iso-2022-jp-3,euc-jisx0213,cp932,euc-jp,sjis,jis,latin,i
 
 set guifont=Ricty\ 11
 
-call neobundle#begin(expand('~/.vim/bundle'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'geoffharcourt/one-dark.vim'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'vim-scripts/twilight'
-NeoBundle 'jonathanfilip/vim-lucius'
-NeoBundle 'jpo/vim-railscasts-theme'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'vim-scripts/Wombat'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'vim-scripts/rdark'
-NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'hynek/vim-python-pep8-indent'
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'Shougo/vimproc.vim'
-NeoBundle 'lazywei/vim-matlab'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'alpaca-tc/alpaca_powertabline'
-NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-NeoBundle 'Lokaltog/powerline-fontpatcher'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'haya14busa/incsearch.vim'
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'open-browser.vim'
-NeoBundle 'miyakogi/seiya.vim'
-call neobundle#end()
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Yggdroot/indentLine'
+Plugin 'geoffharcourt/one-dark.vim'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'vim-scripts/twilight'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'jpo/vim-railscasts-theme'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-scripts/Wombat'
+Plugin 'tomasr/molokai'
+Plugin 'vim-scripts/rdark'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'Townk/vim-autoclose'
+Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/neocomplcache'
+Plugin 'Shougo/unite.vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'kannokanno/previm'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'lazywei/vim-matlab'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'alpaca-tc/alpaca_powertabline'
+Plugin 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+Plugin 'Lokaltog/powerline-fontpatcher'
+Plugin 'Shougo/neomru.vim'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'tpope/vim-fugitive'
+Plugin 'open-browser.vim'
+Plugin 'miyakogi/seiya.vim'
+call vundle#end()
+filetype plugin indent on
 
 colorscheme molokai
 syntax off
 set background=dark
 
 let g:seiya_auto_enable=1
-
-NeoBundleCheck
 
 autocmd QuickFixCmdPost *grep* cwindow
 
