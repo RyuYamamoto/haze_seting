@@ -36,4 +36,37 @@ repo = 'miyakogi/seiya.vim'
 repo = 'preservim/nerdtree'
 
 [[plugins]]
+repo = 'vim-scripts/gtags.vim'
+
+[[plugins]]
+repo = 'lyuts/vim-rtags'
+
+[[plugins]]
+repo = 'vim-jp/vim-cpp'
+
+[[plugins]]
+repo = 'dense-analysis/ale'
+
+[[plugins]]
+repo = 'vim-jp/vim-cpp'
+
+[[plugins]]
+repo = 'critiqjo/lldb.nvim'
+
+[[plugins]]
+repo = 'sakhnik/nvim-gdb'
+
+[[plugins]]
+repo = 'rhysd/vim-clang-format'
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+
+[[plugins]]
 repo = 'taketwo/vim-ros'
+
+[[plugins]]
+repo = 'kassio/neoterm'
+
+[[plugins]]
+repo = 'Shougo/deol.nvim'
