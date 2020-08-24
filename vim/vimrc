@@ -1,160 +1,185 @@
-if has('vim_starting')
-  set nocompatible
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-endif
-
-"if &encoding !=? 'utf-8' | let &termencoding = &encoding | endif
-set encoding=utf-8
-set fileformats=unix,mac,dos
-set fileencodings=utf-8,iso-2022-jp-3,euc-jisx0213,cp932,euc-jp,sjis,jis,latin,iso-2022-jp
-
-set guifont=Ricty\ 11
-
-set nocompatible
-filetype off
+" use bundle manager
+set nocompatible " be iMproved, required
+filetype off " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'geoffharcourt/one-dark.vim'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'vim-scripts/twilight'
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'jpo/vim-railscasts-theme'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-scripts/Wombat'
-Plugin 'tomasr/molokai'
-Plugin 'vim-scripts/rdark'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'Townk/vim-autoclose'
-Plugin 'scrooloose/syntastic'
-Plugin 'Shougo/neocomplcache'
-Plugin 'Shougo/unite.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'kannokanno/previm'
 Plugin 'Shougo/vimproc.vim'
-Plugin 'lazywei/vim-matlab'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'alpaca-tc/alpaca_powertabline'
-Plugin 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-Plugin 'Lokaltog/powerline-fontpatcher'
-Plugin 'Shougo/neomru.vim'
-Plugin 'haya14busa/incsearch.vim'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'tpope/vim-fugitive'
-Plugin 'open-browser.vim'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'Shougo/unite.vim'
+Plugin 'tomasr/molokai'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'miyakogi/seiya.vim'
-call vundle#end()
-filetype plugin indent on
+Plugin 'preservim/nerdtree'
+Plugin 'vim-jp/vim-cpp'
+Plugin 'sakhnik/nvim-gdb'
+Plugin 'rhysd/vim-clang-format'
+Plugin 'kana/vim-operator-user'
+Plugin 'kassio/neoterm'
+Plugin 'Shougo/deol.nvim'
+Plugin 'kgreenek/vim-ros-ycm'
 
+call vundle#end() " required
+filetype plugin indent on " required
+
+" Vim関連設定
+" カラースキーム設定
 colorscheme molokai
-syntax off
+syntax on
 set background=dark
+let g:seiya_auto_enable=0
 
-let g:seiya_auto_enable=1
-
-autocmd QuickFixCmdPost *grep* cwindow
-
-"set statusline+=%{fugitive#statusline()}
-"nnoremap <C-e> :!python %<CR>
-
+" タブ設定など
 set mouse=a
 set smartindent
 set tabstop=2
 set shiftwidth=2
-set showtabline=2
-set softtabstop=2
+set softtabstop=2 
 set laststatus=2
-set t_Co=256
-set noexpandtab
+
+" Gnu globalのキーバインド
 map <C-g> :Gtags
 map <C-f> :Gtags -f
 map <C-k> :Gtags -g
 map <C-i> :GtagsCursor<CR>
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
+let g:gen_tags#gtags_auto_gen = 1
 
-map <C-w> :NERDTree <enter>
+" Airline {{{1
+let g:airline_section_a = airline#section#create(['mode','','branch'])
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+set guifont=Ricty\ Regular\ for\ Powerline:h14
+let g:Powerline_symbols = 'fancy'
+set t_Co=256
+let g:airline_solarized_bg='dark'
+let g:airline_left_sep = '⮀'
+let g:airline_right_sep = '⮂'
+let g:airline_linecolumn_prefix = '⭡'
+let g:airline_branch_prefix = '⭠'
+let g:airline#extensions#tabline#left_sep = '⮀'
+let g:airline#extensions#tabline#left_alt_sep = '⮀'
+" /=Airline }}}1
 
-let g:lightline = {
-    \ 'colorscheme' : 'solarized' ,
-    \ 'component': {
-	\ 'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-    \ 'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
-    \ },
-    \ 'separator': { 'left': '⮀', 'right': '⮂' },
-    \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-    \ }
 
-silent! set title titlelen=100 titleold= titlestring=%f noicon iconstring=%t norightleft showtabline=1
-silent! set number background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key
+ " シンボルカラムを表示したままにする
+let g:ale_sign_column_always = 1
+" 保存時に整形してくれる
+let g:ale_fix_on_save = 1
+" 補完してくれる
+let g:ale_completion_enabled = 1
+" エラー行に表示するマーク
+let g:ale_sign_error = '⨉'
+let g:ale_sign_warning = '⚠'
+" エラー行にカーソルをあわせた際に表示されるメッセージフォーマット
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_linters = {
+\   'c' : ['clangd'],
+\   'cpp' : ['clangd']
+\}
+nnoremap <silent><C-w> :NERDTreeToggle<CR>
 
-silent! syntax enable
+autocmd FileType cpp ClangFormatAutoEnable
 
-set cursorline
-highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+let g:clang_format#style_options = {
+						\ "Language" : "Cpp",
+						\ "AccessModifierOffset" : -2,
+						\ "AlignAfterOpenBracket" : "AlwaysBreak",
+						\ "BasedOnStyle" : "Google",
+						\ "BraceWrapping" : {
+						\		"AfterClass" : "true",
+						\		"AfterFunction" : "true",
+						\		"AfterNamespace" : "true",
+						\		"AfterStruct" : "true"},
+						\		"BreakBeforeBraces" : "Custom",
+						\		"ColumnLimit" : 100,
+						\		"ConstructorInitializerIndentWidth" : 0,
+						\		"ContinuationIndentWidth" : 2,
+						\		"DerivePointerAlignment" : "false",
+						\		"PointerAlignment" : "Middle",
+						\		"ReflowComments" : "false",
+            \ "Standard" : "C++11"}
 
-let g:vimshell_prompt = "⮀ "
-let g:vimshell_secondary_prompt = "⮀ "
-let g:vimshell_user_prompt = 'getcwd()'
+" deol.nvimの設定
+" 【Ctrl + o】 float windowでターミナルを表示
+nnoremap <silent><C-o> :<C-u>Deol -split=floating<CR>
+" 【ESC】 ターミナルモードから抜ける
+"tnoremap <ESC>   <C-\><C-n>
+tnoremap <C-[> <C-\><C-n>
 
-set shellpipe=2>\&1\|/tex/bin/nkf\ -w>%s
-set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+" neotermの設定
+let g:neoterm_default_mod='belowright'
+let g:neoterm_size=20
+let g:neoterm_autoscroll=1
+tnoremap <silent> <C-w> <C-\><C-n><C-w>
+let mapleader = "\<Space>"
+nnoremap <c-t><c-t> :Ttoggle<CR>
+tnoremap <c-t><c-t> <C-¥><C-n>:Ttoggle<CR>
+"nnoremap (keymapping) :T (command)<CR>
+"nnoremap (keymapping) :T (command)<CR><C-w>j
+"nnoremap <Leader> :T cd %:h && cd ../build && cmake .. && make<CR><c-w>j
+nnoremap <silent> <Leader>c :T catkin build<CR><C-w>j
+nnoremap <silent> <Leader>m :T roscd && cd ../ && ./catkin_make_release<CR><C-w>j
+"tnoremap <silent> <ESC> <C-\><C-n><C-w>
+tnoremap <Esc> <C-\><C-n>
 
-set path+=/usr/include/boost
-set path+=/usr/include/eigen3
-set path+=/usr/include/c++/4.8.4
-set path+=/usr/include/qt4
+" rtagsの設定
+nnoremap <silent> <F3> :call rtags#JumpTo()<CR>
+nnoremap <silent> <F4> :<C-u>Unite<Space>rtags/references<CR>
+nnoremap <silent> <F5> :call rtags#JumpToParent()<CR>
+"noremap <leader>ri :call rtags#SymbolInfo()<CR>
+noremap <Leader>j :call rtags#JumpTo(g:SAME_WINDOW)<CR>
+noremap <Leader>J :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
+noremap <Leader>S :call rtags#JumpTo(g:H_SPLIT)<CR>
+noremap <Leader>V :call rtags#JumpTo(g:V_SPLIT)<CR>
+noremap <Leader>T :call rtags#JumpTo(g:NEW_TAB)<CR>
+noremap <Leader>p :call rtags#JumpToParent()<CR>
+noremap <Leader>f :call rtags#FindRefs()<CR>
+noremap <Leader>F :call rtags#FindRefsCallTree()<CR>
+noremap <Leader>n :call rtags#FindRefsByName(input("Pattern? ", "", "customlist,rtags#CompleteSymbols"))<CR>
+noremap <Leader>rs :call rtags#FindSymbols(input("Pattern? ", "", "customlist,rtags#CompleteSymbols"))<CR>
+noremap <Leader>rr :call rtags#ReindexFile()<CR>
+noremap <Leader>rl :call rtags#ProjectList()<CR>
+noremap <Leader>rw :call rtags#RenameSymbolUnderCursor()<CR>
+noremap <Leader>rv :call rtags#FindVirtuals()<CR>
+noremap <Leader>b :call rtags#JumpBack()<CR>
+noremap <Leader>rC :call rtags#FindSuperClasses()<CR>
+noremap <Leader>rc :call rtags#FindSubClasses()<CR>
+noremap <Leader>rd :call rtags#Diagnostics()<CR>
 
-"let g:neocomplcache_enable_at_startup = 1
-"let g:neocomplcache_enable_underbar_completion = 1
+let g:ycm_global_ycm_extra_conf = '/home/haze/catkin_ws/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_min_num_of_chars_for_completion = 2
+let g:ycm_min_num_identifier_candidate_chars = 0
+let g:ycm_max_num_identifier_candidates = 10
+let g:ycm_max_num_candidates = 10
+let g:ycm_auto_trigger = 1
+let g:ycm_show_diagnostic_ui = 0
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_echo_current_diagnostic = 0
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_list_select_completion   = [  '<tab>', '<c-j>']
+let g:ycm_key_list_previous_completion = ['<s-tab>', '<c-k>']
+let g:ycm_use_ultisnips_completer = 0
+let g:ycm_use_clangd = 1
 
-" 入力モードで開始する
-let g:unite_enable_start_insert=1
-" バッファ一覧
-noremap <C-P> :Unite buffer<CR>
-" ファイル一覧
-noremap <C-N> :Unite -buffer-name=file file<CR>
-" 最近使ったファイルの一覧
-noremap <C-Z> :Unite file_mru<CR>
-" sourcesを「今開いているファイルのディレクトリ」とする
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-
-function! RosCatkinMake()
-	echo "RosCatkinMake"
-	! cd ~/catkin_ws/;catkin_make
-endfunction
-command! RosCatkinMake :call RosCatkinMake()
-
-function! RosTopicList()
-	vnew +enew
-	r! rostopic list
-endfunction
-command! RosTopicList :call RosTopicList()
-
-"python setting
-"let g:PyFlakeOnWrite = 1
-"let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes'
-"let g:PyFlakeDefaultComplexity=10
-
-"let g:syntastic_python_checkers = ['pyflakes', 'pep8']
-
-"open-browser.vim
-let g:netrw_nogx = 1
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
-
-"vim上からpythonスクリプト実行
-autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %<CR>
-
-" Shift + 矢印でウィンドウサイズを変更
-nnoremap <S-Left>  <C-w><<CR>
-nnoremap <S-Right> <C-w>><CR>
-nnoremap <S-Up>    <C-w>-<CR>
-nnoremap <S-Down>  <C-w>+<CR>
-
+" Disable function highlighting (affects both C and C++ files)
+let g:cpp_no_function_highlight = 1
+" Put all standard C and C++ keywords under Vim's highlight group 'Statement'
+" (affects both C and C++ files)
+let g:cpp_simple_highlight = 1
+" Enable highlighting of named requirements (C++20 library concepts)
+let g:cpp_named_requirements_highlight = 1
