@@ -1,0 +1,11 @@
+configuration {
+  modi: "window,drun,system:~/.config/rofi/rofi_system.sh";
+  font: "Fira Code 12";
+  show: "combi";
+  sidebar-mode:  true;
+  hide-scrollbar: true;
+  kb-cancel: "Escape,Control+bracketleft";
+  kb-mode-previous: "Alt+l";
+  kb-mode-next: "Alt+r";
+}
+@theme "/usr/share/rofi/themes/solarized_alternate.rasi"
