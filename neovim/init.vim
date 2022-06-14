@@ -8,7 +8,7 @@ runtime! dein.vim
 
 syntax enable
 set background=dark
-colorscheme solarized
+colorscheme hybrid
 
 set mouse=a
 set smartindent
