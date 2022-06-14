@@ -1,0 +1,41 @@
+# [dein.toml]
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# coc
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+merged = 0
+rev = 'release'
+hook_add = '''
+source ~/.config/nvim/plugins/coc.vim
+'''
+
+# ファイルツリーを表示
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+depends = ['ryanoasis/vim-devicons']
+hook_add='''
+nnoremap <silent> <Leader>e :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'tomasr/molokai'
+
+#[[plugins]]
+#repo = 'ycm-core/YouCompleteMe'
+
+[[plugins]]
+repo = 'octol/vim-cpp-enhanced-highlight'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = "chrisbra/csv.vim"
+
+[[plugins]]
+repo = "altercation/vim-colors-solarized"
