@@ -1,6 +1,7 @@
 set -gx TERM xterm-256color
 
 alias vim='nvim'
+alias rosed='colcon edit'
 
 #set -g theme_color_scheme terminal-dark
 

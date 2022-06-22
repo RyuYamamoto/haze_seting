@@ -42,3 +42,9 @@ repo = "altercation/vim-colors-solarized"
 
 [[plugins]]
 repo = "w0ng/vim-hybrid"
+
+[[plugins]]
+repo = 'lotabout/skim'
+
+[[plugins]]
+repo = 'ifreund/skim-preview.vim'
