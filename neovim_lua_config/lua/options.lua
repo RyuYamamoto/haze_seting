@@ -38,6 +38,4 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-vim.cmd 'let g:airline_theme = "wombat"'
-vim.cmd 'let g:airline#extensions#tabline#enabled = 1'
-vim.cmd 'let g:airline_powerline_fonts = 1'
+vim.g.python_recommended_style = 0

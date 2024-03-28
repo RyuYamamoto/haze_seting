@@ -17,14 +17,15 @@ vim.api.nvim_set_keymap('n', 'j', 'gj', opts)
 vim.api.nvim_set_keymap('n', 'k', 'gj', opts)
 
 -- telescope config
-vim.api.nvim_set_keymap('n', "<Leader>f", "<cmd>Telescope frecency<CR>", opts)
+vim.api.nvim_set_keymap('n', "<Leader>fc", "<cmd>Telescope frecency<CR>", opts)
 vim.api.nvim_set_keymap('n', "<Leader>ff", "<cmd>Telescope find_files<CR>", opts)
 vim.api.nvim_set_keymap('n', "<Leader>fg", "<cmd>Telescope live_grep<CR>", opts)
 vim.api.nvim_set_keymap('n', "<Leader>fb", "<cmd>Telescope buffers<CR>", opts)
 vim.api.nvim_set_keymap('n', "<Leader>fh", "<cmd>Telescope help_tags<CR>", opts)
 
 -- NERDTree
-vim.api.nvim_set_keymap('n', "<Leader>e", "<cmd>NERDTreeToggle<CR>", opts)
+-- vim.api.nvim_set_keymap('n', "<Leader>e", "<cmd>NERDTreeToggle<CR>", opts)
+vim.api.nvim_set_keymap('n', "<Leader>e", "<cmd>NvimTreeToggle<CR>", opts)
 
 -- ToggleTerm
 vim.api.nvim_set_keymap('n', "<Leader>tt", "<cmd>ToggleTerm<CR>", opts)
